@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
+import { Sidenav, Nav } from 'rsuite';
+
 import { AiOutlineHome } from "react-icons/ai";
 import { BsFileEarmarkPersonFill } from "react-icons/bs"
 import { BsFillGearFill } from "react-icons/bs"
@@ -8,25 +10,44 @@ import { BsFillGearFill } from "react-icons/bs"
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsShare } from "react-icons/bs";
 
+import { IoIosArrowDropdownCircle } from "react-icons/io";
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   const sideList = [
     {
       icon: <AiOutlineHome className="text-2xl" />,
       title: "Dashboard",
-      href: "/dashboard"
+      href: "/dashboard",
+      canExpand: false
     },
     {
       icon: <BsFileEarmarkPersonFill className="text-2xl" />,
       title: "Profile",
-      href: "/profile"
+      href: "/profile",
+      canExpand: false
     },
     {
       icon: <BsFillGearFill className="text-2xl" />,
       title: "Settings",
-      href: "/settings"
+      href: "/settings",
+      canExpand: true
     },
+  ];
+
+  const settingsList = [
+    {
+      icon: <BsFileEarmarkPersonFill className="text-2xl" />,
+      title: "General Settings",
+      href: ""
+    },
+    {
+      icon: <BsFileEarmarkPersonFill className="text-2xl" />,
+      title: "Notification Settings",
+      href: ""
+    }
   ];
 
   const navList = [
@@ -41,6 +62,11 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
+  // const handleSettingsSubMenu = () => {
+  //   console.log("handleSettingsSubMenu toggled");
+  //   setIsSettingsOpen(!isSettingsOpen);
+  // }
+
   useEffect(() => {
     const handleEscKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) {
@@ -52,6 +78,7 @@ const Navbar = () => {
       document.body.style.setProperty("overflow", "hidden");
     } else {
       document.body.style.removeProperty("overflow");
+      setIsSettingsOpen(false);
     }
 
     document.addEventListener("keydown", handleEscKeyPress);
@@ -60,6 +87,14 @@ const Navbar = () => {
       document.removeEventListener("keydown", handleEscKeyPress);
     };
   }, [isOpen]);
+
+  useEffect(() => {
+    if(isSettingsOpen) {
+      console.log("settings opend");
+    } else {
+      console.log("settings not opend");
+    }
+  }, [isSettingsOpen]);
 
   return (
     <nav className="flex  w-full items-center justify-between px-6 h-16 bg-white text-gray-700 border-b border-gray-200 z-10">
@@ -114,16 +149,49 @@ const Navbar = () => {
             className="h-auto w-48 mx-auto"
           />
         </span>
-        {sideList.map(({ icon, title, href }, index) => {
-          return (
-            <a
-              href={href}
-              key={index}
-              className="flex items-center p-4 hover:bg-pink-500 hover:text-white "
-            >
-              <span className="mr-2">{icon}</span> <span>{title}</span>
-            </a>
-          );
+        {sideList.map(({ icon, title, href, canExpand }, index) => {
+          if(canExpand) {
+            return (
+              <div key={index}>
+                <div className="grid grid-cols-4 justify-between hover:bg-pink-500 hover:text-white ">
+                  <a
+                    href={href}
+                    key={index}
+                    className="flex flex-inline col-span-3 items-center p-4"
+                  >
+                    <span className="mr-2">{icon}</span> <span>{title}</span>
+                  </a>
+                  <button onClick={() => setIsSettingsOpen(!isSettingsOpen)}>
+                    <IoIosArrowDropdownCircle className="pr-2 col-span-1" style={{height:"2rem", width:"2rem"}}></IoIosArrowDropdownCircle>
+                  </button>
+                </div>
+                {
+                  isSettingsOpen &&
+                  settingsList.map(({icon, title, href}, index) => {
+                    return (
+                      <div>
+                        <a href={href} key={index} className="flex text-sm font-light items-center p-4 pl-6 hover:bg-pink-400 hover:text-white ">
+                          <span className="mr-2">{icon}</span> <span>{title}</span>
+                        </a>
+                      </div>
+                    )
+                  })
+                }
+
+              </div>
+            );
+          }
+          else {
+            return (
+              <a
+                href={href}
+                key={index}
+                className="flex items-center p-4 hover:bg-pink-500 hover:text-white "
+              >
+                <span className="mr-2">{icon}</span> <span>{title}</span>
+              </a>
+            );
+          }
         })}
         <div className="fixed bottom-0 w-full">
           <button className="flex items-center p-4 text-white bg-blue-500 hover:bg-blue-600 w-full">
