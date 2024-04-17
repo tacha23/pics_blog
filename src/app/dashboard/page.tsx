@@ -5,16 +5,16 @@ import React, { useState } from 'react'
 import Navbar from "../navbar";
 import Navbar2 from "../navbar2";
 import Image from "next/image"
-import GalleryMenu from "./components/GalleryMenu";
-import LocationMenu from './components/LocationMenu';
-import PersonMenu from './components/PersonMenu';
-import TimeMenu from './components/TimeMenu';
-import AlbumMenu from './components/AlbumMenu';
-import TagMenu from './components/TagMenu';
-import CameraRollPics from './components/albumgallery/CameraRollPics';
-import ScreenshotsPics from './components/albumgallery/ScreenshotsPics';
-import DownloadedPics from './components/albumgallery/DownloadedPics';
-import BluetoothPics from './components/albumgallery/BluetoothPics';
+import GalleryMenu from "./(components)/GalleryMenu";
+import LocationMenu from './(components)/LocationMenu';
+import PersonMenu from './(components)/PersonMenu';
+import TimeMenu from './(components)/TimeMenu';
+import AlbumMenu from './(components)/AlbumMenu';
+import TagMenu from './(components)/TagMenu';
+import CameraRollPics from './(components)/albumgallery/CameraRollPics';
+import ScreenshotsPics from './(components)/albumgallery/ScreenshotsPics';
+import DownloadedPics from './(components)/albumgallery/DownloadedPics';
+import BluetoothPics from './(components)/albumgallery/BluetoothPics';
 
 export default function Dashboard() {
 

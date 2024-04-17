@@ -7,13 +7,17 @@ interface CameraRollPicsProps {
 
 const CameraRollPics: React.FC<CameraRollPicsProps> = ({ sendDataToParent, prevPage = '' }) => {
 
+  console.log("camera roll initiated")
+
     const handleGoBack = (data: string) => {
         sendDataToParent(data)
     }
   return (
     <div>
         <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full' onClick={() => handleGoBack(prevPage)}>Back to { prevPage }</button>
-        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full' onClick={() => handleGoBack('')}>Back to Gallery</button>
+        {/* <a href="/dashboard"> */}
+          <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full' onClick={() => handleGoBack('')}>Back to Gallery</button>
+        {/* </a> */}
         <br />
         CAMERA ROLL
     </div>
