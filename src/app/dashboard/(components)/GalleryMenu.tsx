@@ -51,10 +51,12 @@ const GalleryMenu: React.FC<GalleryMenuProps> = ({ sendDataToParent }) => {
             </div>
 
             <div className={`flex justify-stretch py-2 items-center hover:bg-gray-400 hover:text-white`}>
-                <div className="flex-col" onClick={() => handleClick('album')}>
-                    <Image src="/sample/4.jpeg" width="100" height="100" alt="Sample Picture 4" />
-                    <span className="">By Album</span>
-                </div>
+                <a href="/dashboard/albumgallery">
+                    <div className="flex-col">
+                        <Image src="/sample/4.jpeg" width="100" height="100" alt="Sample Picture 4" />
+                        <span className="">By Album</span>
+                    </div>
+                </a>
             </div>
 
             <div className={`flex justify-stretch py-2 items-center hover:bg-gray-400 hover:text-white`}>

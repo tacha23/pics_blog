@@ -1,23 +1,58 @@
 "use client"
 
-import React from 'react'
-import CameraRollPics from './CameraRollPics'
+import React, { useState, useEffect } from 'react'
+
+import AlbumMenu from '../AlbumMenu';
+import CameraRollPics from './CameraRollPics';
+import ScreenshotsPics from './ScreenshotsPics';
+import DownloadedPics from './DownloadedPics';
+import BluetoothPics from './BluetoothPics';
 
 const AlbumGallery = () => {
 
-  const handleChildClick = (data: string) => {
-    console.log("album gallery page", data)
-  }
+    const [showComponent, setShowComponent] = useState('')
+
+    const handleClick = (albumSelected: string) => {
+      console.log("albumSelected", albumSelected)
+      setShowComponent(albumSelected)
+    }
+
+    const handleChildClick = (data: string) => {
+      console.log("data from child", data)
+      setShowComponent(data)
+    }
+
+    const renderContent = () => {
+      if(showComponent !== '' && showComponent !== 'album') {
+        switch(showComponent) {
+          case 'camera-roll':
+                  return <CameraRollPics sendDataToParent={handleChildClick} prevPage="album" ></CameraRollPics>
+              case 'ss':
+                  return <ScreenshotsPics sendDataToParent={handleChildClick}></ScreenshotsPics>
+              case 'downloaded':
+                  return <DownloadedPics sendDataToParent={handleChildClick}></DownloadedPics>
+              case 'bluetooth-downloads':
+                  return <BluetoothPics sendDataToParent={handleChildClick}></BluetoothPics>
+        }
+      } else {
+        return (
+          <AlbumMenu sendDataToParent={handleClick}></AlbumMenu>
+        )
+      }
+    }
+
+    useEffect(() => {
+      renderContent()
+    }, [showComponent])
+
 
   return (
     <div>
-      <a href="/dashboard">DASHBOARD</a>
-      <br />
+      <main className={`grid p-4`}>
       
-      Album Gallery Page
-      <br />
-
-      <CameraRollPics sendDataToParent={handleChildClick} prevPage="album" ></CameraRollPics>
+        { renderContent() }
+      
+      </main>
     </div>
   )
 }

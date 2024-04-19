@@ -14,10 +14,12 @@ const CameraRollPics: React.FC<CameraRollPicsProps> = ({ sendDataToParent, prevP
     }
   return (
     <div>
-        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full' onClick={() => handleGoBack(prevPage)}>Back to { prevPage }</button>
-        {/* <a href="/dashboard"> */}
-          <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full' onClick={() => handleGoBack('')}>Back to Gallery</button>
-        {/* </a> */}
+        <a href="/dashboard/albumgallery">
+          <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full' onClick={() => handleGoBack(prevPage)}>Back to { prevPage }</button>
+        </a>
+        <a href="/dashboard">
+          <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full'>Back to Gallery</button>
+        </a>
         <br />
         CAMERA ROLL
     </div>

@@ -7,24 +7,23 @@ interface AlbumMenuProps {
 
 const AlbumMenu: React.FC<AlbumMenuProps> = ({ sendDataToParent }) => {
 
-    const handleGoBack = () => {
-        sendDataToParent('')
-    }
+    // const handleGoBack = () => {
+    //     sendDataToParent('')
+    // }
 
     const handleClick = (albumSelected: string) => {
-      console.log("albumSelected", albumSelected)
+      console.log("album menu component albumSelected", albumSelected)
       sendDataToParent(albumSelected)
     }
 
 
   return (
     <div>
-        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full' onClick={handleGoBack}>Back</button>
-        <br />
-        <br />
-        <br />
+        <a href="/dashboard">
+            <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full'>Back</button>
+        </a>
 
-        <main className={`grid p-16`}>
+        <main className={`grid p-4`}>
         <div className={`grid justify-center`}>
             <div className={`grid`}>
                 <p className={`mb-4 pb-4 text-5xl font-semibold underline decoration-wavy decoration-2`}>

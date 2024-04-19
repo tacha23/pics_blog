@@ -54,7 +54,7 @@ export default function Dashboard() {
 
     return (
         <div>
-            <Navbar></Navbar>
+            {/* <Navbar></Navbar> */}
             {
                 renderContent()
             }
